@@ -4,4 +4,24 @@
         <input name="word" placeholder="输入您想检索的词"></input>
         <button form-type="submit">检索</button>
     </form>
+    <view wx:if= "{{searchedResult.length >= 1}}">
+      <text>{{searchedResult.mandarin}}</text>
+      <view wx:for="{{searchedResult}}" wx:key="index">
+       <text>
+       畲语：
+        {{item.she_writing}}
+       </text>
+       <text>
+       读音：
+        {{item.she_tone}}
+       </text>
+       <text>
+       发音：
+        {{item.she_pronounce}}
+       </text>
+      </view>
+    </view>    
+    <view wx:else>
+      (╥﹏╥) 小编正在加班翻译中。。。
+    </view>
 </view>

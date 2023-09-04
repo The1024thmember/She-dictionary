@@ -5,7 +5,8 @@ Page({
    * Page initial data
    */
   data: {
-
+    searchedData : "",
+    searchedResult:  [],
   },
 
   /**
@@ -13,12 +14,20 @@ Page({
    * @param {*} options 
    */
   submitSearch(event) {
+    console.log('content:',event.detail.value.word);
+    this.setData({
+      searchedData: event.detail.value.word
+    });
     wx.cloud.callFunction({
         name: "searchWord",
         data: {
-            content: event.detail.value.content
+            content: event.detail.value.word
         },
         success: (res)=> {
+          console.log('res:',res);
+          this.setData({
+            searchedResult: res.result
+          });
             wx.navigateTo({
               url: '/pages/dictionary/dictionary',
             })
