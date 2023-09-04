@@ -1,0 +1,7 @@
+
+<view>
+    <form bindsubmit="submitSearch">
+        <input name="word" placeholder="输入您想检索的词"></input>
+        <button form-type="submit">检索</button>
+    </form>
+</view>
