@@ -6,7 +6,7 @@ Page({
    */
   data: {
     searchedData : "",
-    searchedResult:  [],
+    searchedResult:  null,
   },
 
   /**
@@ -15,30 +15,37 @@ Page({
    */
   submitSearch(event) {
     console.log('content:',event.detail.value.word);
-    this.setData({
-      searchedData: event.detail.value.word
-    });
-    wx.cloud.callFunction({
-        name: "searchWord",
-        data: {
-            content: event.detail.value.word
-        },
-        success: (res)=> {
-          console.log('res:',res);
-          this.setData({
-            searchedResult: res.result
-          });
-            wx.navigateTo({
-              url: '/pages/dictionary/dictionary',
-            })
-        },
-        complete: (res)=>{
-
-        }
-    })
-    console.log("")
+    if(event.detail.value.word){
+      this.setData({
+        searchedData: event.detail.value.word,
+      });
+      wx.showLoading({
+        title: '正在检索',
+      });
+      wx.cloud.callFunction({
+          name: "searchWord",
+          data: {
+              content: event.detail.value.word
+          },
+          success: (res)=> {
+            console.log('res:',res);
+            this.setData({
+              searchedResult: res.result
+            });
+            wx.hideLoading();
+          },
+          complete: (res)=>{
+            wx.hideLoading();
+          }
+      })
+    }
   },
-
+  onTyping(event) {
+    this.setData({
+      searchedResult: null,
+      searchedData:'',
+    });
+  },
   /**
    * Lifecycle function--Called when page load
    */

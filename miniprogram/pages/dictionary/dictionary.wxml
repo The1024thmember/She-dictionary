@@ -1,27 +1,26 @@
 
-<view>
-    <form bindsubmit="submitSearch">
-        <input name="word" placeholder="输入您想检索的词"></input>
-        <button form-type="submit">检索</button>
+<view class="container">
+    <h1 class="heading">汉译畲词典</h1>
+    <form class="form" bindsubmit="submitSearch">
+        <input class="input" name="word" placeholder="输入您想检索的词" bindfocus="onTyping"></input>
+        <button class="button" form-type="submit">检索</button>
     </form>
-    <view wx:if= "{{searchedResult.length >= 1}}">
-      <text>{{searchedResult.mandarin}}</text>
+    <view wx:if= "{{searchedResult && searchedResult.length >= 1}}">
+      <text class="searchedWord">{{searchedResult[0].mandarin}} ({{searchedResult[0].english}}) : </text>
       <view wx:for="{{searchedResult}}" wx:key="index">
-       <text>
-       畲语：
-        {{item.she_writing}}
+       <text class="inline">
+       畲语：{{item.she_writing}}
        </text>
-       <text>
-       读音：
-        {{item.she_tone}}
+       <text class="inline">
+       读音：{{item.she_tone}}
        </text>
-       <text>
+       <text class="inline">
        发音：
-        {{item.she_pronounce}}
        </text>
+       <span class="speaker">🔊</span>
       </view>
     </view>    
-    <view wx:else>
+    <view wx:if = "{{searchedResult && searchedResult.length === 0}}">
       (╥﹏╥) 小编正在加班翻译中。。。
     </view>
 </view>

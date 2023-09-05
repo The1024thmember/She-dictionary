@@ -1,1 +1,51 @@
 /* pages/dictionary/dictionary.wxss */
+/** Use rpx for responsiveness, 1px = 2rpx as 1 rpx assumes 1 px in screen size of 750px*/
+.container {
+  padding-top: 54rpx;
+  background-color: #f6f6f6;
+  padding-bottom: 60rpx;
+  margin: auto;
+  max-width: 700rpx ;
+}
+
+.heading {
+  font-size: 50rpx;
+  font-weight: bold;
+  color: #303030;
+}
+.searchedWord {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 60rpx 0;
+  align-items: baseline;
+}
+
+input {
+  display: inline-block;
+  border-bottom: 2rpx solid #303030;
+  margin-right: 2rpx;
+  height: 68rpx;
+  width: 460rpx;
+}
+
+button {
+  background-color: #2a2b2a;
+  color: rgb(231, 231, 231);
+  display: inline;
+  position: relative;
+  top:-24rpx;
+}
+.inline {
+  display: inline-block;
+  padding-right: 46rpx;
+}
+.speaker {
+  font-size: x-large;
+  position:relative;
+  left: -50rpx;
+  top: 6rpx;
+}
