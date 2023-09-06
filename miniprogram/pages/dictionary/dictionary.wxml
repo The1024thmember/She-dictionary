@@ -14,10 +14,12 @@
        <text class="inline">
        读音：{{item.she_tone}}
        </text>
-       <text class="inline">
-       发音：
-       </text>
-       <span class="speaker">🔊</span>
+       <view class="inline" data-item-index="{{index}}"bind:tap="playAudio">
+          <text class="inline" >
+          发音：
+          </text>
+          <span class="speaker" >🔊</span>
+      </view>
       </view>
     </view>    
     <view wx:if = "{{searchedResult && searchedResult.length === 0}}">

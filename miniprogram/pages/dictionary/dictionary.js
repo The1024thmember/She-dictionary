@@ -7,8 +7,34 @@ Page({
   data: {
     searchedData : "",
     searchedResult:  null,
+    audioContext: null,
   },
 
+  /**
+   * 
+   * @param {*} event 
+   */
+  playAudio(event) {
+    console.log("event for play audio:",event);
+    console.log("index:",event.currentTarget.dataset.itemIndex);
+    const index = event.currentTarget.dataset.itemIndex
+    if (!this.data.audioContext) {
+      this.data.audioContext = wx.createInnerAudioContext();
+      this.data.audioContext.src = this.data.searchedResult[index].audio;
+    }
+    console.log("searchedResult[index].audio:",this.data.searchedResult[index].audio);
+
+    this.data.audioContext.play();
+
+    this.data.audioContext.onPlay(() => {
+      console.log('index %s is on playing',index);
+    });
+
+    this.data.audioContext.onEnded(() => {
+      console.log('index %s is finished',index);
+      // You can perform additional actions here when the audio finishes playing
+    });
+  },
   /**
    * On submitting a search request
    * @param {*} options 
